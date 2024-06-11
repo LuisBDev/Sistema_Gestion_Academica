@@ -1,7 +1,10 @@
 package com.academic.sistemagestionacademica.controller;
 
 import com.academic.sistemagestionacademica.model.Grupo;
+import com.academic.sistemagestionacademica.service.ICursoService;
+import com.academic.sistemagestionacademica.service.IDocenteService;
 import com.academic.sistemagestionacademica.service.IGrupoService;
+import com.academic.sistemagestionacademica.service.IHorarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +18,20 @@ public class GrupoController {
     @Autowired
     private IGrupoService grupoService;
 
-    @PostMapping("/save")
-    public void save(@RequestBody Grupo grupo) {
+    @Autowired
+    private IHorarioService horarioService;
+
+    @Autowired
+    private IDocenteService docenteService;
+
+    @Autowired
+    private ICursoService cursoService;
+
+    @PostMapping("/save/{horarioId}/{docenteId}/{cursoId}")
+    public void save(@RequestBody Grupo grupo, @PathVariable Long horarioId, @PathVariable Long docenteId, @PathVariable Long cursoId) {
+        grupo.setHorario(horarioService.findById(horarioId));
+        grupo.setDocente(docenteService.findById(docenteId));
+        grupo.setCurso(cursoService.findById(cursoId));
         grupoService.save(grupo);
     }
 
