@@ -45,6 +45,13 @@ public class GrupoController {
         return grupoService.findById(id);
     }
 
+    @GetMapping("/findGrupos/{nombreCurso}")
+    public List<Grupo> findGruposPorCurso(@PathVariable String nombreCurso) {
+        return grupoService.findGruposPorCurso(nombreCurso);
+    }
+
+
+
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Grupo grupo) {
         Grupo grupoToUpdate = grupoService.findById(id);

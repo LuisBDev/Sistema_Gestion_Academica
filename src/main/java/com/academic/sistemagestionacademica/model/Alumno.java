@@ -1,5 +1,6 @@
 package com.academic.sistemagestionacademica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,8 @@ public class Alumno {
     private String address;
 
     @OneToMany(mappedBy = "alumno")
+    @JsonIgnore
+    // TODO: Implementar DTO para evitar referencias circulares
     private List<Matricula> matriculas;
 
 

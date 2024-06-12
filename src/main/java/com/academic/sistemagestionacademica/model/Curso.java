@@ -1,6 +1,7 @@
 package com.academic.sistemagestionacademica.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,5 +29,6 @@ public class Curso {
     private Double pagoHora;
 
     @OneToMany(mappedBy = "curso")
+    @JsonIgnore
     private List<Grupo> grupos;
 }

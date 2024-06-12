@@ -33,4 +33,11 @@ public class GrupoDAOImpl implements IGrupoDAO {
     public void deleteById(Long id) {
         grupoRepository.deleteById(id);
     }
+
+    @Override
+    public List<Grupo> findGruposPorCurso(String nombreCurso) {
+        return grupoRepository.findGruposPorCurso(nombreCurso);
+    }
+
+
 }

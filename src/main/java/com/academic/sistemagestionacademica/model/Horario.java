@@ -1,5 +1,6 @@
 package com.academic.sistemagestionacademica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Horario {
     private String horario;
 
     @OneToMany(mappedBy = "horario")
+    @JsonIgnore
     private List<Grupo> grupos;
 
 }

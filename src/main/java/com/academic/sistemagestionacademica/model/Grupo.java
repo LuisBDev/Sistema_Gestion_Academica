@@ -1,5 +1,6 @@
 package com.academic.sistemagestionacademica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,6 +37,7 @@ public class Grupo {
 
     @ManyToOne
     @JoinColumn(name = "curso_id")
+    @JsonIgnore
     private Curso curso;
 
     @ManyToOne
@@ -43,6 +45,7 @@ public class Grupo {
     private Horario horario;
 
     @OneToMany(mappedBy = "grupo")
+    @JsonIgnore
     private List<Matricula> matriculas;
 
     @ManyToOne

@@ -1,5 +1,6 @@
 package com.academic.sistemagestionacademica.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,6 +28,7 @@ public class Docente {
     private String address;
 
     @OneToMany(mappedBy = "docente")
+    @JsonIgnore
     private List<Grupo> grupos;
 
 

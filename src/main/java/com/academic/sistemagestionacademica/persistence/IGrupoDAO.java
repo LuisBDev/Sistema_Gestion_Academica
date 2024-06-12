@@ -14,4 +14,5 @@ public interface IGrupoDAO {
 
     public void deleteById(Long id);
 
+    List<Grupo> findGruposPorCurso(String nombreCurso);
 }

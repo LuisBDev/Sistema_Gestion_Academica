@@ -33,4 +33,9 @@ public class GrupoServiceImpl implements IGrupoService {
     public void deleteById(Long id) {
         grupoDAO.deleteById(id);
     }
+
+    @Override
+    public List<Grupo> findGruposPorCurso(String nombreCurso) {
+        return grupoDAO.findGruposPorCurso(nombreCurso);
+    }
 }

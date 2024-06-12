@@ -12,4 +12,6 @@ public interface IGrupoService {
     public Grupo findById(Long id);
 
     public void deleteById(Long id);
+
+    List<Grupo> findGruposPorCurso(String nombreCurso);
 }
