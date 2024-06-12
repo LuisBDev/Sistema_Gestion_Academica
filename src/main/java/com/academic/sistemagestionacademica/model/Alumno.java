@@ -20,16 +20,21 @@ public class Alumno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String dni;
-    private String firstName;
-    private String lastName;
-    private String telefono;
+    private String tipoDocumento;
+    private String numeroDocumento;
+    private String nombres;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
     private String email;
     private String address;
+    private String phone;
+    private Character genero;
 
     @OneToMany(mappedBy = "alumno")
     @JsonIgnore
     // TODO: Implementar DTO para evitar referencias circulares
+    // TODO: Implementar ENUMs para los estados de pago
+    //  (por revisar,pagado, solicitar reembolso, reembolsado, etc)
     private List<Matricula> matriculas;
 
 

@@ -20,12 +20,15 @@ public class Docente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String dni;
-    private String firstName;
-    private String lastName;
-    private String telefono;
+    private String tipoDocumento;
+    private String numeroDocumento;
+    private String nombres;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
     private String email;
     private String address;
+    private String phone;
+    private Character genero;
 
     @OneToMany(mappedBy = "docente")
     @JsonIgnore

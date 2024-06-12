@@ -36,22 +36,20 @@ public class DocenteController {
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Docente docente) {
         Docente docenteToUpdate = docenteService.findById(id);
         if (docenteToUpdate != null) {
-            if (docente.getFirstName() != null) {
-                docenteToUpdate.setFirstName(docente.getFirstName());
+            if (docente.getNumeroDocumento() != null) {
+                docenteToUpdate.setNumeroDocumento(docente.getNumeroDocumento());
             }
-
-            if (docente.getLastName() != null) {
-                docenteToUpdate.setLastName(docente.getLastName());
+            if (docente.getNombres() != null) {
+                docenteToUpdate.setNombres(docente.getNombres());
             }
-
-            if (docente.getDni() != null) {
-                docenteToUpdate.setDni(docente.getDni());
+            if (docente.getApellidoPaterno() != null) {
+                docenteToUpdate.setApellidoPaterno(docente.getApellidoPaterno());
+            }
+            if (docente.getPhone() != null) {
+                docenteToUpdate.setPhone(docente.getPhone());
             }
             if (docente.getEmail() != null) {
                 docenteToUpdate.setEmail(docente.getEmail());
-            }
-            if (docente.getTelefono() != null) {
-                docenteToUpdate.setTelefono(docente.getTelefono());
             }
             if (docente.getAddress() != null) {
                 docenteToUpdate.setAddress(docente.getAddress());

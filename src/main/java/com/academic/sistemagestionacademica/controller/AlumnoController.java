@@ -35,17 +35,17 @@ public class AlumnoController {
     public ResponseEntity<?> updateById(@PathVariable Long id, @RequestBody Alumno alumno) {
         Alumno alumnoToUpdate = alumnoService.findById(id);
         if (alumnoToUpdate != null) {
-            if (alumno.getDni() != null) {
-                alumnoToUpdate.setDni(alumno.getDni());
+            if (alumno.getNumeroDocumento() != null) {
+                alumnoToUpdate.setNumeroDocumento(alumno.getNumeroDocumento());
             }
-            if (alumno.getFirstName() != null) {
-                alumnoToUpdate.setFirstName(alumno.getFirstName());
+            if (alumno.getNombres() != null) {
+                alumnoToUpdate.setNombres(alumno.getNombres());
             }
-            if (alumno.getLastName() != null) {
-                alumnoToUpdate.setLastName(alumno.getLastName());
+            if (alumno.getApellidoPaterno() != null) {
+                alumnoToUpdate.setApellidoPaterno(alumno.getApellidoPaterno());
             }
-            if (alumno.getTelefono() != null) {
-                alumnoToUpdate.setTelefono(alumno.getTelefono());
+            if (alumno.getPhone() != null) {
+                alumnoToUpdate.setPhone(alumno.getPhone());
             }
             if (alumno.getEmail() != null) {
                 alumnoToUpdate.setEmail(alumno.getEmail());

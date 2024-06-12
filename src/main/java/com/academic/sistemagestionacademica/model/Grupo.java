@@ -25,15 +25,22 @@ public class Grupo {
 
     private String codigo;
 
+    private String nivel;
+
     private String categoria;
 
     private String descripcion;
+
+    private Integer numeroVacantes;
+
+    private Integer numeroMatriculados;
+
+    private String observacion;
 
     private LocalDate fechaInicio;
 
     private LocalDate fechaFin;
 
-    private String observacion;
 
     @ManyToOne
     @JoinColumn(name = "curso_id")

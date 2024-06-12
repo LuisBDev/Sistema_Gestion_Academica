@@ -32,6 +32,7 @@ public class GrupoController {
         grupo.setHorario(horarioService.findById(horarioId));
         grupo.setDocente(docenteService.findById(docenteId));
         grupo.setCurso(cursoService.findById(cursoId));
+        grupo.setNumeroMatriculados(0);
         grupoService.save(grupo);
     }
 

@@ -35,6 +35,7 @@ public class AdminController {
             matricula.setAlumno(alumno);
             matricula.setGrupo(grupo);
             grupo.getMatriculas().add(matricula);
+            grupo.setNumeroMatriculados(grupo.getNumeroMatriculados()+1);
 
             alumno.getMatriculas().add(matricula);
             grupoService.save(grupo);
@@ -42,8 +43,34 @@ public class AdminController {
             matriculaService.save(matricula);
             return ResponseEntity.ok("Matricula realizada correctamente");
         }
+    }
 
 
+    @PutMapping("/transferirMatricula/{alumnoId}/{grupoAntiguoId}/{grupoNuevoId}")
+    public ResponseEntity<?> transferirMatricula(@PathVariable Long alumnoId, @PathVariable Long grupoAntiguoId, @PathVariable Long grupoNuevoId) {
+        Alumno alumno = alumnoService.findById(alumnoId);
+        Grupo grupoAntiguo = grupoService.findById(grupoAntiguoId);
+        Grupo grupoNuevo = grupoService.findById(grupoNuevoId);
+
+
+        if (alumno.getMatriculas().stream().anyMatch(matricula1 -> matricula1.getGrupo().getId().equals(grupoNuevoId))) {
+            return ResponseEntity.badRequest().body("El alumno ya esta matriculado en el grupo");
+        } else {
+            Matricula matricula = alumno.getMatriculas().stream().filter(matricula1 -> matricula1.getGrupo().getId().equals(grupoAntiguoId)).findFirst().orElse(null);
+            if (matricula != null) {
+                matricula.setGrupo(grupoNuevo);
+                grupoAntiguo.getMatriculas().remove(matricula);
+                grupoNuevo.getMatriculas().add(matricula);
+                grupoAntiguo.setNumeroMatriculados(grupoAntiguo.getNumeroMatriculados()-1);
+                grupoNuevo.setNumeroMatriculados(grupoNuevo.getNumeroMatriculados()+1);
+                grupoService.save(grupoAntiguo);
+                grupoService.save(grupoNuevo);
+                matriculaService.save(matricula);
+                return ResponseEntity.ok("Matricula transferida correctamente");
+            } else {
+                return ResponseEntity.badRequest().body("El alumno no esta matriculado en el grupo antiguo");
+            }
+        }
     }
 
 }
