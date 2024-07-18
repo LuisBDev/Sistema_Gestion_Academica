@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/admin")
+@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class AdminController {
 
     @Autowired
@@ -54,7 +55,7 @@ public class AdminController {
 
 
         if (alumno.getMatriculas().stream().anyMatch(matricula1 -> matricula1.getGrupo().getId().equals(grupoNuevoId))) {
-            return ResponseEntity.badRequest().body("El alumno ya esta matriculado en el grupo");
+            return ResponseEntity.badRequest().body("El alumno ya esta matriculado en el grupo nuevo: " + grupoNuevo.getCodigo());
         } else {
             Matricula matricula = alumno.getMatriculas().stream().filter(matricula1 -> matricula1.getGrupo().getId().equals(grupoAntiguoId)).findFirst().orElse(null);
             if (matricula != null) {
@@ -66,9 +67,10 @@ public class AdminController {
                 grupoService.save(grupoAntiguo);
                 grupoService.save(grupoNuevo);
                 matriculaService.save(matricula);
-                return ResponseEntity.ok("Matricula transferida correctamente");
+                return ResponseEntity.ok("Matricula transferida correctamente desde el grupo: "
+                        + grupoAntiguo.getCodigo() + " al grupo: " + grupoNuevo.getCodigo());
             } else {
-                return ResponseEntity.badRequest().body("El alumno no esta matriculado en el grupo antiguo");
+                return ResponseEntity.badRequest().body("El alumno no esta matriculado en el grupo antiguo: " + grupoAntiguo.getCodigo());
             }
         }
     }
