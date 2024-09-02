@@ -35,6 +35,8 @@ public class MatriculaController {
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Matricula matricula) {
         Matricula matriculaToUpdate = matriculaService.findById(id);
+
+
         if (matriculaToUpdate != null) {
             if (matricula.getCuenta() != null) {
                 matriculaToUpdate.setCuenta(matricula.getCuenta());
@@ -78,6 +80,22 @@ public class MatriculaController {
             matriculaService.save(matriculaToUpdate);
             return ResponseEntity.ok().body("Matricula actualizado");
         } else {
+            return ResponseEntity.ok().body("Matricula no encontrado");
+        }
+    }
+
+    @PatchMapping("/update2/{id}")
+    public ResponseEntity<?> update2(@PathVariable Long id, @RequestBody Matricula matricula)
+    {
+        Matricula matriculaToUpdate = matriculaService.findById(id);
+        if (matriculaToUpdate != null)
+        {
+            matricula.setId(id);
+            matriculaService.save(matricula);
+            return ResponseEntity.ok().body("Matricula actualizada setteando id");
+        }
+        else
+        {
             return ResponseEntity.ok().body("Matricula no encontrado");
         }
     }
